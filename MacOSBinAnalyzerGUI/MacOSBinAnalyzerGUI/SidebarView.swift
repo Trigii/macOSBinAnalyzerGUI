@@ -29,7 +29,7 @@ struct SidebarView: View {
             }
         }
         
-        // create query button (out of the list so its always visible)
+        // button to add query groups (out of the list so its always visible)
         .safeAreaInset(edge: .bottom){
             Button(action: {
                 let newGroup = QueryGroup(title: "New Group") // TODO: spawn a prompt so the user can give it a name

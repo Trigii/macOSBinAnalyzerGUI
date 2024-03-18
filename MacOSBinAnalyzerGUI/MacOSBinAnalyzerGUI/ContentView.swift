@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selection = QuerySection.prebuilt // sidebar selection state
-    @State private var allQueries = Query.examples()
-    @State private var prebuiltQueries = Query.examples() // TODO: change to prebuilt queries hardcoded
-    @State private var userCreatedGroups: [QueryGroup] = QueryGroup.examples()
+    @State private var selection = QuerySection.all // sidebar selection state
+    @State private var allQueries: [Query] = []
+    @State private var prebuiltQueries: [Query] = [] // TODO: change to prebuilt queries hardcoded
+    @State private var userCreatedGroups: [QueryGroup] = []
     @State private var searchTerm: String = ""
 
     var body: some View {
@@ -23,15 +23,25 @@ struct ContentView: View {
                     case .all:
                         QueryListView(title: "All", queries: $allQueries)
                     case .prebuilt:
-                        QueryListView(title: "Prebuilt Queries", queries: $prebuiltQueries) // TODO: change to prebuilt queries hardcoded
+                        QueryListView(title: "Prebuilt Queries", queries: $prebuiltQueries) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
                     case .list(let queryGroup):
-                    StaticQueryListView(title: queryGroup.title, queries: queryGroup.queries)
+                        // Create a binding for the queries in the selected query group
+                        let groupQueries = $userCreatedGroups[getIndex(for: queryGroup)]
+                        QueryListView(title: queryGroup.title, queries: groupQueries.queries)
                 }
             } else {
-                StaticQueryListView(title: "All", queries: allQueries.filter({ $0.title.contains(searchTerm) }))
+                QueryListView(title: "All", queries: Binding(get: {self.allQueries.filter({ $0.title.contains(searchTerm) })}, set: { _ in }))
             }
             // StaticQueryListView() // and display the queries
         }
         .searchable(text: $searchTerm) // adds automatically the searchbar at the top
+    }
+    
+    // Helper function to get the index of the selected query group
+    private func getIndex(for queryGroup: QueryGroup) -> Int {
+        if let index = userCreatedGroups.firstIndex(where: { $0.id == queryGroup.id }) {
+            return index
+        }
+        return 0
     }
 }

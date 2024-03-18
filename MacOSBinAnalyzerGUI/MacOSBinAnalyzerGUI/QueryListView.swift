@@ -13,7 +13,6 @@ struct QueryListView: View {
     let title: String
     @Binding var queries: [Query] // list of all queries to display
     @State private var selectedQuery: Query? = nil // keep track of the selected query for the inspector (to show query details)
-
     @State private var inspectorIsShown: Bool = false // state of the inspector (default: false)
 
     var body: some View {
@@ -25,7 +24,8 @@ struct QueryListView: View {
             ToolbarItemGroup {
                 // add query button
                 Button {
-                    queries.append(Query(title: "New Query")) // TODO: add query options
+                    let new_query = Query(title: "New Query")
+                    queries.append(new_query) // TODO: add query options
                 } label: {
                     Label("Create New Query", systemImage: "plus")
                 }

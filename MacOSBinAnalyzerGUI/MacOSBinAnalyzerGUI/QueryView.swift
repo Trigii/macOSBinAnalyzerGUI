@@ -22,7 +22,7 @@ struct QueryView: View {
                 inspectorIsShown = true // update the inspector state
                 selectedQuery = query // update the selected query state
             }, label: {
-                Text("More")
+                Text("Run")
             })
         }
     }
