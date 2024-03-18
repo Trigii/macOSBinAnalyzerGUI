@@ -1,1 +1,1 @@
-GUI for MacOSBinAnalyzer tool from Carlo´s Polop
+GUI for MacOSBinAnalyzer tool
