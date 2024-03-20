@@ -37,7 +37,6 @@ class SQLiteManager {
         } else {
             print("Error opening database")
         }
-        print(queryResults)
         return queryResults.isEmpty ? nil : queryResults
     }
 }

@@ -23,6 +23,7 @@ struct PathView: View {
                 Button("Save") {
                     // Update the query title
                     databasePath = newPath
+                    updateSuccessMessage = "Query updated successfully" // Set success message
                 }
                 .padding()
             }

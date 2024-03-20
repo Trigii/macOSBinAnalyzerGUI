@@ -27,7 +27,7 @@ struct ContentView: View {
                     case .all:
                     QueryListView(title: "All", queries: $allQueries, selectedQuery: $selectedQuery, databasePath: $databasePath)
                     case .prebuilt:
-                    QueryListView(title: "Prebuilt Queries", queries: $prebuiltQueries, selectedQuery: $selectedQuery, databasePath: $databasePath) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
+                    PrebuildQueryListView(title: "Prebuilt Queries", selectedQuery: $selectedQuery, databasePath: $databasePath) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
                     case .list(let queryGroup):
                         // Create a binding for the queries in the selected query group
                         let groupQueries = $userCreatedGroups[getIndex(for: queryGroup)]

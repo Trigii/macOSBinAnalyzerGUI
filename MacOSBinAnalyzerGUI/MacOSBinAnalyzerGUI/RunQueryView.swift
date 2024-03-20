@@ -10,16 +10,21 @@ import SwiftUI
 struct RunQueryView: View {
     @Binding var query: Query
     @Binding var databasePath: String
+    @State private var searchText = ""
     
     var body: some View {
         if let queryResults = SQLiteManager.executeQuery(query.query, databasePath: databasePath) {
             if !queryResults.isEmpty {
                 List {
-                    ForEach(queryResults, id: \.self) { row in
+                    ForEach(queryResults.filter {
+                        searchText.isEmpty ||
+                            $0.values.joined(separator: " ").localizedCaseInsensitiveContains(searchText)
+                    }, id: \.self) { row in
                         QueryResultRowView(row: row)
                     }
                 }
                 .listStyle(PlainListStyle())
+                .searchable(text: $searchText)
             } else {
                 Text("No results found")
                     .foregroundColor(.red)

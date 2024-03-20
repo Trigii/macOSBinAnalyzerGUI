@@ -21,6 +21,7 @@
 		6AB740402BA9BA52009248E9 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7403F2BA9BA52009248E9 /* PathView.swift */; };
 		6AB740422BAA11BB009248E9 /* RunQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740412BAA11BB009248E9 /* RunQueryView.swift */; };
 		6AB740442BAA132C009248E9 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740432BAA132C009248E9 /* SQLiteManager.swift */; };
+		6AB740462BAB2DBE009248E9 /* PrebuildQueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		6AB7403F2BA9BA52009248E9 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		6AB740412BAA11BB009248E9 /* RunQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunQueryView.swift; sourceTree = "<group>"; };
 		6AB740432BAA132C009248E9 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrebuildQueryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				6AB7403F2BA9BA52009248E9 /* PathView.swift */,
 				6AB740412BAA11BB009248E9 /* RunQueryView.swift */,
 				6AB740432BAA132C009248E9 /* SQLiteManager.swift */,
+				6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */,
 			);
 			path = MacOSBinAnalyzerGUI;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				6AB7403A2BA8998E009248E9 /* SidebarView.swift in Sources */,
 				6AB740442BAA132C009248E9 /* SQLiteManager.swift in Sources */,
 				6AB7403C2BA899C6009248E9 /* QueryListView.swift in Sources */,
+				6AB740462BAB2DBE009248E9 /* PrebuildQueryListView.swift in Sources */,
 				6AB740362BA89908009248E9 /* QuerySection.swift in Sources */,
 				6AB740402BA9BA52009248E9 /* PathView.swift in Sources */,
 				6AB740322BA8985D009248E9 /* Query.swift in Sources */,

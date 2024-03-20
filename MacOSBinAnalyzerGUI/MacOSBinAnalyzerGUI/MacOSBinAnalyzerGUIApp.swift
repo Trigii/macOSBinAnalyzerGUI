@@ -16,7 +16,7 @@ struct MacOSBinAnalyzerGUI: App {
         WindowGroup {
             ContentView(databasePath: $databasePath, selectedQuery: $selectedQuery)
         }
-        WindowGroup("Run query", id: "run-query") {
+        WindowGroup("Query Results", id: "run-query") {
             RunQueryView(query: $selectedQuery, databasePath: $databasePath)
         }
     }
