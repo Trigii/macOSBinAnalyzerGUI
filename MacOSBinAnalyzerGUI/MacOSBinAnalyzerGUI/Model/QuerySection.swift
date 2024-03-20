@@ -8,12 +8,15 @@
 import Foundation
 
 enum QuerySection: Identifiable, CaseIterable, Hashable {
+    case path
     case all
     case prebuilt
     case list(QueryGroup)
 
     var id: String {
         switch self {
+            case .path:
+                "path"
             case .all:
                 "all"
             case .prebuilt:
@@ -25,6 +28,8 @@ enum QuerySection: Identifiable, CaseIterable, Hashable {
 
     var displayName: String {
         switch self {
+            case .path:
+                "Path"
             case .all:
                 "All"
             case .prebuilt:
@@ -36,6 +41,8 @@ enum QuerySection: Identifiable, CaseIterable, Hashable {
 
     var iconName: String {
         switch self {
+            case .path:
+                "gear"
             case .all:
                 "star"
             case .prebuilt:

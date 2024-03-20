@@ -10,9 +10,13 @@ import SwiftUI
 struct SidebarView: View {
     @Binding var userCreatedGroups: [QueryGroup]
     @Binding var selection: QuerySection // to know what tab has been selected (modified by tag)
-
+    
     var body: some View {
         List(selection: $selection) {
+            Section("Configuration"){
+                Label(QuerySection.path.displayName, systemImage: QuerySection.path.iconName).tag(QuerySection.path)
+            }
+            
             Section("Favorites") {
                 ForEach(QuerySection.allCases) { selection in
                     Label(selection.displayName, systemImage: selection.iconName).tag(selection) // display sidebar options
@@ -38,6 +42,5 @@ struct SidebarView: View {
                 Label("Create Query Group", systemImage: "plus.circle")
             }).buttonStyle(.borderless).foregroundColor(.accentColor).padding().frame(maxWidth: .infinity, alignment: .leading)
         }
-
     }
 }

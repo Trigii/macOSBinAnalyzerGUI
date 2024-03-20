@@ -13,24 +13,28 @@ struct ContentView: View {
     @State private var prebuiltQueries: [Query] = [] // TODO: change to prebuilt queries hardcoded
     @State private var userCreatedGroups: [QueryGroup] = []
     @State private var searchTerm: String = ""
-
+    @Binding var databasePath: String
+    @Binding var selectedQuery: Query
+    
     var body: some View {
         NavigationSplitView {
             SidebarView(userCreatedGroups: $userCreatedGroups, selection: $selection) // we navigate through the sidebar
         } detail: { // depends on the selected tab
             if searchTerm.isEmpty {
                 switch selection {
+                    case .path:
+                        PathView(databasePath: $databasePath)
                     case .all:
-                        QueryListView(title: "All", queries: $allQueries)
+                    QueryListView(title: "All", queries: $allQueries, selectedQuery: $selectedQuery, databasePath: $databasePath)
                     case .prebuilt:
-                        QueryListView(title: "Prebuilt Queries", queries: $prebuiltQueries) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
+                    QueryListView(title: "Prebuilt Queries", queries: $prebuiltQueries, selectedQuery: $selectedQuery, databasePath: $databasePath) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
                     case .list(let queryGroup):
                         // Create a binding for the queries in the selected query group
                         let groupQueries = $userCreatedGroups[getIndex(for: queryGroup)]
-                        QueryListView(title: queryGroup.title, queries: groupQueries.queries)
+                    QueryListView(title: queryGroup.title, queries: groupQueries.queries, selectedQuery: $selectedQuery, databasePath: $databasePath)
                 }
             } else {
-                QueryListView(title: "All", queries: Binding(get: {self.allQueries.filter({ $0.title.contains(searchTerm) })}, set: { _ in }))
+                QueryListView(title: "All", queries: Binding(get: {self.allQueries.filter({ $0.title.contains(searchTerm) })}, set: { _ in }), selectedQuery: $selectedQuery, databasePath: $databasePath)
             }
             // StaticQueryListView() // and display the queries
         }
