@@ -22,6 +22,7 @@
 		6AB740422BAA11BB009248E9 /* RunQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740412BAA11BB009248E9 /* RunQueryView.swift */; };
 		6AB740442BAA132C009248E9 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740432BAA132C009248E9 /* SQLiteManager.swift */; };
 		6AB740462BAB2DBE009248E9 /* PrebuildQueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */; };
+		6AB740482BAB4A30009248E9 /* AllQueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740472BAB4A30009248E9 /* AllQueryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6AB740412BAA11BB009248E9 /* RunQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunQueryView.swift; sourceTree = "<group>"; };
 		6AB740432BAA132C009248E9 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
 		6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrebuildQueryListView.swift; sourceTree = "<group>"; };
+		6AB740472BAB4A30009248E9 /* AllQueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQueryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				6AB740412BAA11BB009248E9 /* RunQueryView.swift */,
 				6AB740432BAA132C009248E9 /* SQLiteManager.swift */,
 				6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */,
+				6AB740472BAB4A30009248E9 /* AllQueryListView.swift */,
 			);
 			path = MacOSBinAnalyzerGUI;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				6AB740362BA89908009248E9 /* QuerySection.swift in Sources */,
 				6AB740402BA9BA52009248E9 /* PathView.swift in Sources */,
 				6AB740322BA8985D009248E9 /* Query.swift in Sources */,
+				6AB740482BAB4A30009248E9 /* AllQueryListView.swift in Sources */,
 				6AB740342BA898DA009248E9 /* QueryGroup.swift in Sources */,
 				6AB740422BAA11BB009248E9 /* RunQueryView.swift in Sources */,
 				6A02D2402BA8957E00493F99 /* MacOSBinAnalyzerGUIApp.swift in Sources */,

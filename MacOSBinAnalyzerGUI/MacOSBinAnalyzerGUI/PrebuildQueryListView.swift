@@ -13,7 +13,6 @@ struct PrebuildQueryListView: View {
     @Binding var selectedQuery: Query // keep track of the selected query for the inspector (to show query details)
     @State private var inspectorIsShown: Bool = false // state of the inspector (default: false)
     @Binding var databasePath: String
-    @State private var newQuery = ""
     
     @State private var isExpanded: [Bool] // to track expansion state of categories
 

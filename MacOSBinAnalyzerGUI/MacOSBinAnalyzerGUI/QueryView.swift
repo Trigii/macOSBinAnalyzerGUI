@@ -23,7 +23,7 @@ struct QueryView: View {
             
             // query details button
             Button(action: {
-                if inspectorIsShown && query.id==selectedQuery.id { // if details is pressed again it closes the inspector
+                if inspectorIsShown && query.id==selectedQuery.id { // close the inspector if its already opened
                     inspectorIsShown = false
                 }else { // open inspector for the first time
                     inspectorIsShown = true // update the inspector state

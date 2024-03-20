@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = QuerySection.all // sidebar selection state
-    @State private var allQueries: [Query] = []
     @State private var prebuiltQueries: [Query] = [] // TODO: change to prebuilt queries hardcoded
     @State private var userCreatedGroups: [QueryGroup] = []
     @State private var searchTerm: String = ""
@@ -22,21 +21,22 @@ struct ContentView: View {
         } detail: { // depends on the selected tab
             if searchTerm.isEmpty {
                 switch selection {
-                    case .path:
-                        PathView(databasePath: $databasePath)
-                    case .all:
-                    QueryListView(title: "All", queries: $allQueries, selectedQuery: $selectedQuery, databasePath: $databasePath)
-                    case .prebuilt:
-                    PrebuildQueryListView(title: "Prebuilt Queries", selectedQuery: $selectedQuery, databasePath: $databasePath) // TODO: create a PrebuiltQueriesView that dont allow to add queries and contains the queries hardcoded.
-                    case .list(let queryGroup):
-                        // Create a binding for the queries in the selected query group
-                        let groupQueries = $userCreatedGroups[getIndex(for: queryGroup)]
-                    QueryListView(title: queryGroup.title, queries: groupQueries.queries, selectedQuery: $selectedQuery, databasePath: $databasePath)
+                case .path:
+                    PathView(databasePath: $databasePath)
+                case .all:
+                    AllQueryListView(title: "All", queryGroups: $userCreatedGroups, selectedQuery: $selectedQuery, databasePath: $databasePath)
+                case .prebuilt:
+                    PrebuildQueryListView(title: "Prebuilt Queries", selectedQuery: $selectedQuery, databasePath: $databasePath)
+                case .list(let queryGroup):
+                    // Create a binding for the queries in the selected query group
+                    let groupQueries = $userCreatedGroups[getIndex(for: queryGroup)].queries
+                    QueryListView(title: queryGroup.title, queries: groupQueries, selectedQuery: $selectedQuery, databasePath: $databasePath)
                 }
             } else {
-                QueryListView(title: "All", queries: Binding(get: {self.allQueries.filter({ $0.title.contains(searchTerm) })}, set: { _ in }), selectedQuery: $selectedQuery, databasePath: $databasePath)
+                let filteredQueries = userCreatedGroups.flatMap { $0.queries }.filter { $0.title.contains(searchTerm) }
+                QueryListView(title: "Search Results", queries: .constant(filteredQueries), selectedQuery: $selectedQuery, databasePath: $databasePath)
+                // Wrap filteredQueries in a constant Binding to satisfy the expected type
             }
-            // StaticQueryListView() // and display the queries
         }
         .searchable(text: $searchTerm) // adds automatically the searchbar at the top
     }
@@ -49,3 +49,4 @@ struct ContentView: View {
         return 0
     }
 }
+
