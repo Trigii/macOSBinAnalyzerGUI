@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @Binding var userCreatedGroups: [QueryGroup]
-    @Binding var selection: QuerySection // to know what tab has been selected (modified by tag)
+    @Binding var selection: QuerySection // to know what tab has been selected
     
     var body: some View {
         List(selection: $selection) {
@@ -36,7 +36,7 @@ struct SidebarView: View {
         // button to add query groups (out of the list so its always visible)
         .safeAreaInset(edge: .bottom){
             Button(action: {
-                let newGroup = QueryGroup(title: "New Group") // TODO: spawn a prompt so the user can give it a name
+                let newGroup = QueryGroup(title: "New Group")
                 userCreatedGroups.append(newGroup)
             }, label: {
                 Label("Create Query Group", systemImage: "plus.circle")

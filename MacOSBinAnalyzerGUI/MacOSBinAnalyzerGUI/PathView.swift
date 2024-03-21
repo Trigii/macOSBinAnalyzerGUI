@@ -13,27 +13,43 @@ struct PathView: View {
     @State private var updateSuccessMessage = "" // Message to indicate successful update
     
     var body: some View {
-        VStack {
-            TextField(databasePath , text: $newPath)
-                .frame(minWidth: 500, minHeight: 100)
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            HStack {
-                Button("Save") {
-                    // Update the query title
-                    databasePath = newPath
-                    updateSuccessMessage = "Query updated successfully" // Set success message
-                }
-                .padding()
+        VStack(spacing: 16) {
+            Text("Database Path")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            if databasePath != "" {
+                TextField(databasePath, text: $newPath)
+                    .frame(maxWidth: .infinity)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+            } else {
+                TextField("Enter new path", text: $newPath)
+                    .frame(maxWidth: .infinity)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
             }
-            // Display success message if available
+            
+            Button(action: {
+                // Update the database path
+                databasePath = newPath
+                updateSuccessMessage = "Database path updated successfully" // Set success message
+            }) {
+                Text("Save")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(BorderlessButtonStyle())
+            
             if !updateSuccessMessage.isEmpty {
                 Text(updateSuccessMessage)
                     .foregroundColor(.green)
-                    .padding()
             }
         }
         .padding()
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
+

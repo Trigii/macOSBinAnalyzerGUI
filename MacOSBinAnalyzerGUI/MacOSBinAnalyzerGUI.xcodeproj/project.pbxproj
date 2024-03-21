@@ -17,7 +17,6 @@
 		6AB740382BA89946009248E9 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740372BA89946009248E9 /* QueryView.swift */; };
 		6AB7403A2BA8998E009248E9 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740392BA8998E009248E9 /* SidebarView.swift */; };
 		6AB7403C2BA899C6009248E9 /* QueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7403B2BA899C6009248E9 /* QueryListView.swift */; };
-		6AB7403E2BA899FB009248E9 /* StaticQueryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7403D2BA899FB009248E9 /* StaticQueryListView.swift */; };
 		6AB740402BA9BA52009248E9 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB7403F2BA9BA52009248E9 /* PathView.swift */; };
 		6AB740422BAA11BB009248E9 /* RunQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740412BAA11BB009248E9 /* RunQueryView.swift */; };
 		6AB740442BAA132C009248E9 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB740432BAA132C009248E9 /* SQLiteManager.swift */; };
@@ -38,7 +37,6 @@
 		6AB740372BA89946009248E9 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		6AB740392BA8998E009248E9 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		6AB7403B2BA899C6009248E9 /* QueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryListView.swift; sourceTree = "<group>"; };
-		6AB7403D2BA899FB009248E9 /* StaticQueryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticQueryListView.swift; sourceTree = "<group>"; };
 		6AB7403F2BA9BA52009248E9 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		6AB740412BAA11BB009248E9 /* RunQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunQueryView.swift; sourceTree = "<group>"; };
 		6AB740432BAA132C009248E9 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 				6AB740372BA89946009248E9 /* QueryView.swift */,
 				6AB740392BA8998E009248E9 /* SidebarView.swift */,
 				6AB7403B2BA899C6009248E9 /* QueryListView.swift */,
-				6AB7403D2BA899FB009248E9 /* StaticQueryListView.swift */,
 				6AB7403F2BA9BA52009248E9 /* PathView.swift */,
 				6AB740412BAA11BB009248E9 /* RunQueryView.swift */,
 				6AB740432BAA132C009248E9 /* SQLiteManager.swift */,
@@ -196,7 +193,6 @@
 				6AB740342BA898DA009248E9 /* QueryGroup.swift in Sources */,
 				6AB740422BAA11BB009248E9 /* RunQueryView.swift in Sources */,
 				6A02D2402BA8957E00493F99 /* MacOSBinAnalyzerGUIApp.swift in Sources */,
-				6AB7403E2BA899FB009248E9 /* StaticQueryListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

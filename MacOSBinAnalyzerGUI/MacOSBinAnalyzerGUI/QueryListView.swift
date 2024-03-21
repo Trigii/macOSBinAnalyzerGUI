@@ -43,37 +43,88 @@ struct QueryListView: View {
         }
         
         // inspector configuration
-        .inspector(isPresented: $inspectorIsShown){
-            Group {
-                let selectedQuery = selectedQuery
-                Text(selectedQuery.title).font(.title)
-                Text("Path: \(databasePath)").font(.subheadline)
-                Text("isPreBuilt: \(String(selectedQuery.isPreBuilt))").font(.subheadline)
-                VStack {
-                    TextField(selectedQuery.query ?? "Enter Query", text: $newQuery)
-                        .padding()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    HStack {
-                        Button("Save") {
-                            // Update the query's query property
-                            if let index = queries.firstIndex(where: { $0.id == selectedQuery.id }) {
-                                queries[index].query = newQuery
-                                updateSuccessMessage = "Query updated successfully" // Set success message
-                            }
-                        }
-                        .padding()
-                    }
-                    
-                    // Display success message if available
-                    if !updateSuccessMessage.isEmpty {
-                        Text(updateSuccessMessage)
-                            .foregroundColor(.green)
-                            .padding()
+        .inspector(isPresented: $inspectorIsShown) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text(selectedQuery.title)
+                    .font(.title)
+                    .foregroundColor(Color.blue)
+                    .padding(.bottom, 8)
+                
+                Text("Database Path:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                Text(databasePath)
+                    .font(.body)
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 8)
+                
+                Text("Is Prebuilt:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                Text(selectedQuery.isPreBuilt ? "Yes" : "No")
+                    .font(.body)
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 8)
+                
+                Divider()
+                
+                Text("Current Query:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                Text(selectedQuery.query ?? "N/A")
+                    .font(.body)
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 8)
+                
+                Divider()
+                
+                Text("Edit Query:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                TextField(selectedQuery.query ?? "Enter Query", text: $newQuery)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                
+                Divider()
+                
+                Button("Save") {
+                    // Update the query's query property
+                    if let index = queries.firstIndex(where: { $0.id == selectedQuery.id }) {
+                        queries[index].query = newQuery
+                        updateSuccessMessage = "Query updated successfully" // Set success message
                     }
                 }
-                .padding()
-            }.frame(maxWidth: .infinity)
+                .buttonStyle(FilledButtonStyle())
+                .padding(.vertical, 12)
+                
+                // Display success message if available
+                if !updateSuccessMessage.isEmpty {
+                    Text(updateSuccessMessage)
+                        .foregroundColor(.green)
+                }
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
         }
+
+
+
+
+    }
+}
+
+struct FilledButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.white)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 24)
+            .background(configuration.isPressed ? Color.blue.opacity(0.8) : Color.blue)
+            .cornerRadius(8)
     }
 }

@@ -53,18 +53,51 @@ struct PrebuildQueryListView: View {
             }
         }
         // inspector configuration
-        .inspector(isPresented: $inspectorIsShown){
-            Group {
-                let selectedQuery = selectedQuery
-                Text(selectedQuery.title).font(.title)
-                Text("Path: \(databasePath)").font(.subheadline)
-                Text("isPreBuilt: \(String(selectedQuery.isPreBuilt))").font(.subheadline)
+        .inspector(isPresented: $inspectorIsShown) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text(selectedQuery.title)
+                    .font(selectedQuery.title.count > 20 ? .title3 : .title) // Adjust font size dynamically
+                    .foregroundColor(Color.blue)
+                    .padding(.bottom, 8)
+                
+                Text("Database Path:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                Text(databasePath)
+                    .font(.body)
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 8)
+                
+                Text("Is Prebuilt:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
+                Text(selectedQuery.isPreBuilt ? "Yes" : "No")
+                    .font(.body)
+                    .foregroundColor(Color.black)
+                    .padding(.bottom, 8)
+                
+                Divider()
+                
+                Text("Query:")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+                
                 if let query = selectedQuery.query {
-                    Text("Query: \(query)")
+                    Text(query)
+                        .font(.body)
+                        .foregroundColor(Color.black)
+                        .padding(.bottom, 8)
                 } else {
-                    Text("Query: N/A")
+                    Text("N/A")
+                        .font(.body)
+                        .foregroundColor(Color.gray)
+                        .padding(.bottom, 8)
                 }
-            }.frame(maxWidth: .infinity)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -107,8 +140,4 @@ struct PrebuiltQueryCategory: Identifiable {
     let id = UUID()
     let title: String
     let queries: [Query]
-}
-
-private func example() -> Query {
-    Query(title: "Get exec with high privs", isPreBuilt: true, query: "SELECT path, privileged, privilegedReasons FROM executables WHERE privileged='High';", searchResult: ["column1": "result1", "column2": "result2"])
 }
