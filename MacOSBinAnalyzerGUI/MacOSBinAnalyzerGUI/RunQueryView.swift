@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+struct RowWrapper: Identifiable {
+    let id = UUID()
+    let row: [String: String]
+}
+
 struct RunQueryView: View {
     @Binding var query: Query
     @Binding var databasePath: String
@@ -25,8 +30,9 @@ struct RunQueryView: View {
                             ForEach(queryResults.filter {
                                 searchTerm.isEmpty ||
                                     $0.values.joined(separator: " ").localizedCaseInsensitiveContains(searchTerm)
-                            }, id: \.self) { row in
-                                QueryResultRowView(row: row)
+                            }.map { RowWrapper(row: $0) }) { rowWrapper in
+                                QueryResultRowView(row: rowWrapper.row)
+                                    .id(rowWrapper.id) // Ensure each row has a unique identifier
                             }
                         }
                     }.searchable(text: $searchTerm)
@@ -51,7 +57,7 @@ struct QueryColumnHeaderView: View {
     var body: some View {
         HStack {
             Spacer() // Aligns first column header to the center
-            if let path = row["path"] {
+            if let path = row["path"] { // path goes first
                 Text("Path")
                     .fontWeight(.bold)
                     .foregroundColor(.blue)

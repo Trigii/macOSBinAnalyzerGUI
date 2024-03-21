@@ -89,6 +89,10 @@ struct QueryListView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .frame(maxWidth: .infinity)
+                    .onAppear {
+                        // Pre-populate the text field with the previously set query
+                        newQuery = selectedQuery.query ?? ""
+                    }
                 
                 Divider()
                 
