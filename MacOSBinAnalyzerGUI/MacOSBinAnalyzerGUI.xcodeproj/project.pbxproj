@@ -74,20 +74,14 @@
 		6A02D23E2BA8957E00493F99 /* MacOSBinAnalyzerGUI */ = {
 			isa = PBXGroup;
 			children = (
+				6AB740492BAD89FB009248E9 /* Views */,
 				6A02D23F2BA8957E00493F99 /* MacOSBinAnalyzerGUIApp.swift */,
 				6A02D2412BA8957E00493F99 /* ContentView.swift */,
 				6AB740302BA897CC009248E9 /* Model */,
 				6A02D2432BA8958000493F99 /* Assets.xcassets */,
 				6A02D2482BA8958000493F99 /* MacOSBinAnalyzerGUI.entitlements */,
 				6A02D2452BA8958000493F99 /* Preview Content */,
-				6AB740372BA89946009248E9 /* QueryView.swift */,
-				6AB740392BA8998E009248E9 /* SidebarView.swift */,
-				6AB7403B2BA899C6009248E9 /* QueryListView.swift */,
-				6AB7403F2BA9BA52009248E9 /* PathView.swift */,
-				6AB740412BAA11BB009248E9 /* RunQueryView.swift */,
 				6AB740432BAA132C009248E9 /* SQLiteManager.swift */,
-				6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */,
-				6AB740472BAB4A30009248E9 /* AllQueryListView.swift */,
 			);
 			path = MacOSBinAnalyzerGUI;
 			sourceTree = "<group>";
@@ -108,6 +102,20 @@
 				6AB740352BA89908009248E9 /* QuerySection.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6AB740492BAD89FB009248E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6AB740392BA8998E009248E9 /* SidebarView.swift */,
+				6AB7403F2BA9BA52009248E9 /* PathView.swift */,
+				6AB740372BA89946009248E9 /* QueryView.swift */,
+				6AB7403B2BA899C6009248E9 /* QueryListView.swift */,
+				6AB740452BAB2DBE009248E9 /* PrebuildQueryListView.swift */,
+				6AB740472BAB4A30009248E9 /* AllQueryListView.swift */,
+				6AB740412BAA11BB009248E9 /* RunQueryView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

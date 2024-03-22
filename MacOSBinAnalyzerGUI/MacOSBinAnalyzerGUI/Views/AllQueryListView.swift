@@ -1,48 +1,41 @@
 //
-//  QueryListView.swift
+//  AllQueryListView.swift
 //  MacOSBinAnalyzerGUI
 //
-//  Created by Tristán on 18/3/24.
+//  Created by Tristán on 20/3/24.
 //
-// View of a created query list
 
 import SwiftUI
 
-struct QueryListView: View {
-    // arguments
+struct AllQueryListView: View {
     let title: String
-    @Binding var queries: [Query] // list of all queries to display
-    @Binding var selectedQuery: Query // keep track of the selected query for the inspector (to show query details)
-    @State private var inspectorIsShown: Bool = false // state of the inspector (default: false)
+    @Binding var queryGroups: [QueryGroup]
+    @Binding var selectedQuery: Query
     @Binding var databasePath: String
     @State private var newQuery = ""
-    @State private var updateSuccessMessage = "" // Message to indicate successful update
+    @State private var updateSuccessMessage = ""
+    @State private var inspectorIsShown: Bool = false
     
     var body: some View {
-        List($queries) { $query in //display all queries made
-            QueryView(query: $query, selectedQuery: $selectedQuery, inspectorIsShown: $inspectorIsShown, databasePath: $databasePath)
-        }
-        .navigationTitle(title) // display custom title for each query list
-        .toolbar { // edit the toolbar of the query list view
-            ToolbarItemGroup {
-                // add query button
-                Button {
-                    let new_query = Query(title: "New Query")
-                    queries.append(new_query)
-                } label: {
-                    Label("Create New Query", systemImage: "plus")
-                }
-                
-                // show inspector button
-                Button {
-                    inspectorIsShown.toggle() // if its clicked
-                } label: {
-                    Label("Show inspector", systemImage: "sidebar.right")
+        List {
+            ForEach(queryGroups) { group in
+                Section(header: Text(group.title)) {
+                    ForEach(group.queries) { query in
+                        QueryView(query: .constant(query), selectedQuery: $selectedQuery, inspectorIsShown: $inspectorIsShown, databasePath: $databasePath)
+                    }
                 }
             }
         }
-        
-        // inspector configuration
+        .navigationTitle(title)
+        .toolbar {
+            ToolbarItemGroup {
+                Button(action: {
+                    inspectorIsShown.toggle()
+                }) {
+                    Label("Show Inspector", systemImage: "sidebar.right")
+                }
+            }
+        }
         .inspector(isPresented: $inspectorIsShown) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(selectedQuery.title)
@@ -90,23 +83,22 @@ struct QueryListView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .onAppear {
-                        // Pre-populate the text field with the previously set query
                         newQuery = selectedQuery.query ?? ""
                     }
                 
                 Divider()
                 
                 Button("Save") {
-                    // Update the query's query property
-                    if let index = queries.firstIndex(where: { $0.id == selectedQuery.id }) {
-                        queries[index].query = newQuery
-                        updateSuccessMessage = "Query updated successfully" // Set success message
+                    if let groupIndex = queryGroups.firstIndex(where: { $0.queries.contains(where: { $0.id == selectedQuery.id }) }) {
+                        if let queryIndex = queryGroups[groupIndex].queries.firstIndex(where: { $0.id == selectedQuery.id }) {
+                            queryGroups[groupIndex].queries[queryIndex].query = newQuery
+                            updateSuccessMessage = "Query updated successfully"
+                        }
                     }
                 }
                 .buttonStyle(FilledButtonStyle())
                 .padding(.vertical, 12)
                 
-                // Display success message if available
                 if !updateSuccessMessage.isEmpty {
                     Text(updateSuccessMessage)
                         .foregroundColor(.green)
@@ -115,20 +107,5 @@ struct QueryListView: View {
             .padding()
             .frame(maxWidth: .infinity)
         }
-
-
-
-
-    }
-}
-
-struct FilledButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .foregroundColor(.white)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 24)
-            .background(configuration.isPressed ? Color.blue.opacity(0.8) : Color.blue)
-            .cornerRadius(8)
     }
 }

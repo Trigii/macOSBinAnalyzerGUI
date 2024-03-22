@@ -12,12 +12,12 @@ struct Query: Identifiable, Hashable {
     var title: String
     var isPreBuilt: Bool
     var query: String?
-    var searchResult: [String: String]
+    var description: String?
 
-    init(title: String, isPreBuilt: Bool = false, query: String? = nil, searchResult: [String: String] = [:]) {
+    init(title: String, isPreBuilt: Bool = false, query: String? = nil, description: String = "") {
         self.title = title
         self.isPreBuilt = isPreBuilt
         self.query = query
-        self.searchResult = searchResult
+        self.description = description
     }
 }

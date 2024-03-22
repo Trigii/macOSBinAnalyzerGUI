@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-struct RowWrapper: Identifiable {
-    let id = UUID()
-    let row: [String: String]
-}
-
 struct RunQueryView: View {
     @Binding var query: Query
     @Binding var databasePath: String
@@ -28,11 +23,9 @@ struct RunQueryView: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(queryResults.filter {
-                                searchTerm.isEmpty ||
-                                    $0.values.joined(separator: " ").localizedCaseInsensitiveContains(searchTerm)
-                            }.map { RowWrapper(row: $0) }) { rowWrapper in
-                                QueryResultRowView(row: rowWrapper.row)
-                                    .id(rowWrapper.id) // Ensure each row has a unique identifier
+                                searchTerm.isEmpty || $0.values.joined(separator: " ").localizedCaseInsensitiveContains(searchTerm)
+                            }, id: \.self) { row in
+                                QueryResultRowView(row: row)
                             }
                         }
                     }.searchable(text: $searchTerm)
@@ -51,29 +44,20 @@ struct RunQueryView: View {
     }
 }
 
+
 struct QueryColumnHeaderView: View {
     var row: [String: String]
     
     var body: some View {
         HStack {
-            Spacer() // Aligns first column header to the center
-            if let path = row["path"] { // path goes first
-                Text("Path")
+            Spacer() // Aligns path column header to the center
+            ForEach(row.sorted(by: <), id: \.key) { (key, _) in
+                Spacer()
+                Text(key)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .center)
-            }
-            Spacer() // Aligns path column header to the center
-            ForEach(row.sorted(by: <), id: \.key) { (key, _) in
-                if key != "path" {
-                    Spacer()
-                    Text(key)
-                        .fontWeight(.bold)
-                        .foregroundColor(.blue)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
                 Spacer() // Aligns other column headers to the center
             }
         }
@@ -88,23 +72,13 @@ struct QueryResultRowView: View {
     
     var body: some View {
         HStack {
-            if let path = row["path"] {
+            ForEach(row.sorted(by: <), id: \.key) { (key, value) in
                 Spacer()
-                Text(path)
+                Text(value)
                     .foregroundColor(.primary)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .center) // Aligning center
                 Spacer()
-            }
-            ForEach(row.sorted(by: <), id: \.key) { (key, value) in
-                if key != "path" {
-                    Spacer()
-                    Text(value)
-                        .foregroundColor(.primary)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity, alignment: .center) // Aligning center
-                    Spacer()
-                }
             }
         }
         .padding(.vertical, 8)
