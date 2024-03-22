@@ -44,7 +44,6 @@ struct RunQueryView: View {
     }
 }
 
-
 struct QueryColumnHeaderView: View {
     var row: [String: String]
     
@@ -85,5 +84,3 @@ struct QueryResultRowView: View {
         .background(Color.secondary.opacity(0.1))
     }
 }
-
-

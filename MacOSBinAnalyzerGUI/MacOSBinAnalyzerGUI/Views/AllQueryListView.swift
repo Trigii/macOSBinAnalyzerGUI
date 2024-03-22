@@ -17,25 +17,33 @@ struct AllQueryListView: View {
     @State private var inspectorIsShown: Bool = false
     
     var body: some View {
-        List {
-            ForEach(queryGroups) { group in
-                Section(header: Text(group.title)) {
-                    ForEach(group.queries) { query in
-                        QueryView(query: .constant(query), selectedQuery: $selectedQuery, inspectorIsShown: $inspectorIsShown, databasePath: $databasePath)
+        VStack {
+            List {
+                ForEach(queryGroups) { group in
+                    Section(header: Text(group.title)) {
+                        ForEach(group.queries) { query in
+                            QueryView(query: .constant(query), selectedQuery: $selectedQuery, inspectorIsShown: $inspectorIsShown, databasePath: $databasePath)
+                        }
                     }
                 }
             }
-        }
-        .navigationTitle(title)
-        .toolbar {
-            ToolbarItemGroup {
+            .listStyle(SidebarListStyle()) // Apply sidebar list style
+            
+            Divider() // Add divider between list and toolbar
+            
+            HStack {
+                Spacer() // Push buttons to the right
+                
                 Button(action: {
-                    inspectorIsShown.toggle()
+                    inspectorIsShown.toggle() // Toggle inspector
                 }) {
                     Label("Show Inspector", systemImage: "sidebar.right")
                 }
+                .buttonStyle(FilledButtonStyle())
             }
+            .padding()
         }
+        .navigationTitle(title)
         .inspector(isPresented: $inspectorIsShown) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(selectedQuery.title)
@@ -83,29 +91,32 @@ struct AllQueryListView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .onAppear {
+                        // Pre-populate the text field with the previously set query
                         newQuery = selectedQuery.query ?? ""
                     }
                 
                 Divider()
                 
                 Button("Save") {
+                    // Update the query's query property
                     if let groupIndex = queryGroups.firstIndex(where: { $0.queries.contains(where: { $0.id == selectedQuery.id }) }) {
                         if let queryIndex = queryGroups[groupIndex].queries.firstIndex(where: { $0.id == selectedQuery.id }) {
                             queryGroups[groupIndex].queries[queryIndex].query = newQuery
-                            updateSuccessMessage = "Query updated successfully"
+                            updateSuccessMessage = "Query updated successfully" // Set success message
                         }
                     }
                 }
                 .buttonStyle(FilledButtonStyle())
                 .padding(.vertical, 12)
                 
+                // Display success message if available
                 if !updateSuccessMessage.isEmpty {
                     Text(updateSuccessMessage)
                         .foregroundColor(.green)
                 }
             }
             .padding()
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
